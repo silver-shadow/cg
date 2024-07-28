@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 11 - Image Contouring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Program 11: Contour an Image</h1>
+    <pre><code>
+import cv2
+import numpy as np
+
+# Load the image
+image = cv2.imread('image/atc.jpg')
+
+# Convert the image to grayscale
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Apply binary thresholding
+ret, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+# Find contours
+contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# Create a copy of the original image to draw contours on
+contour_image = image.copy()
+
+# Draw contours on the image
+cv2.drawContours(contour_image, contours, -1, (0, 255, 0), 2)
+
+# Display the original and contour images
+cv2.imshow('Original Image', image)
+cv2.imshow('Contours', contour_image)
+
+# Wait for a key press to close the windows
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+    </code></pre>
+</body>
+</html>

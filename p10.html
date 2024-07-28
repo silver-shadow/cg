@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 10 - Image Blurring and Smoothing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Program 10: Blur and Smooth an Image</h1>
+    <pre><code>
+import cv2
+
+# Load the image
+image = cv2.imread('image/atc.jpg')
+
+# Gaussian Blur
+gaussian_blur = cv2.GaussianBlur(image, (5, 5), 0)
+
+# Median Blur
+median_blur = cv2.medianBlur(image, 5)
+
+# Bilateral Filter
+bilateral_filter = cv2.bilateralFilter(image, 9, 75, 75)
+
+# Display the original and processed images
+cv2.imshow('Original Image', image)
+cv2.imshow('Gaussian Blur', gaussian_blur)
+cv2.imshow('Median Blur', median_blur)
+cv2.imshow('Bilateral Filter', bilateral_filter)
+
+# Wait for a key press to close the windows
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+    </code></pre>
+</body>
+</html>

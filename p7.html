@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program 7 - Image Quadrants</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Program 7: Split and Display Image into 4 Quadrants</h1>
+    <pre><code>
+import cv2
+import numpy as np
+
+# Load the image
+image_path = "image.jpg" # Replace with the path to your image
+img = cv2.imread(image_path)
+
+# Get the height and width of the image
+height, width, _ = img.shape
+
+# Split the image into four quadrants
+up_left = img[0:height//2, 0:width//2]
+up_right = img[0:height//2, width//2:width]
+down_left = img[height//2:height, 0:width//2]
+down_right = img[height//2:height, width//2:width]
+
+# Create a blank canvas to display the quadrants
+canvas = np.zeros((height, width, 3), dtype=np.uint8)
+
+# Place the quadrants on the canvas
+canvas[0:height//2, 0:width//2] = up_left
+canvas[0:height//2, width//2:width] = up_right
+canvas[height//2:height, 0:width//2] = down_left
+canvas[height//2:height, width//2:width] = down_right
+
+# Display the canvas
+cv2.imshow("Image Quadrants", canvas)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+    </code></pre>
+</body>
+</html>
